@@ -125,7 +125,7 @@ input, select {
 .font-choice {
   padding: 0 1em;
   text-transform: uppercase;
-  width: 40px;
+  width: 35px;
 }
 
 .font-choice img {
@@ -138,8 +138,8 @@ input, select {
 
 .circle {
     display: inline-block;
-   height: 20px;
-   width: 20px;
+   height: 22px;
+   width: 22px;
    border-radius: 50%;
    margin-right: 5px;
    margin-left: 5px;

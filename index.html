@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>N E O N</title>
+        <meta name="description" content="neon sign generator">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -13,6 +13,7 @@
         <link href="http://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/skeleton.css">
         <link rel="stylesheet" href="css/main.css">
         <script src="https://www.google-analytics.com/analytics.js"></script><script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -25,15 +26,16 @@
         <!-- Add your site or application content here -->
         <div id="neon" ng-controller="neonForm" class="ng-scope">
 
-<!--             <select class="nullable" ng-model="neonForm.myDesign" ng-options="design.name for design in neonForm.designs">
+            <select class="nullable" ng-model="neonForm.myDesign" ng-options="design.name for design in neonForm.designs">
                 <option>choose symbol</option>
-            </select> -->
+            </select>
 
-<!--             <p class='inline or'>OR</p> -->
+            <p class='inline or'>OR</p>
+
             <input type="text" ng-model="neonForm.name" placeholder="name">
 
             <div ng-repeat="font in neonForm.fonts" ng-click="neonForm.selectFont($index, font)" ng-class="{sel: font.name == neonForm.myFont.name}" class="inline">
-                <div class='font-choice'><img src="{{font.img}}"></div>
+                <div class='font-choice'><img ng-src="{{font.img}}"></div>
             </div><!-- end ngRepeat: font in neonForm.fonts -->
 
             <div ng-repeat="color in neonForm.colors" ng-click="neonForm.selectColor($index, color)" ng-class="{sel: color.name == neonForm.myColor.name}" class="inline">
@@ -43,13 +45,18 @@
             <div class="random-button inline" ng-click="neonForm.randomize()">
                 Randomize
             </div>
-<!--          <p>SELECTED : {{neonForm.myDesign.path}} </p> -->
                 <div class="brick">
-                    <h1 style="font-size:{{neonForm.myFont.size}};font-family:{{neonForm.myFont.family}};text-shadow:0 0 10px #fff, 0 0 20px {{neonForm.myColor.hex}}, 0 0 30px {{neonForm.myColor.hex}}, 0 0 40px {{neonForm.myColor.hex}}, 0 0 50px {{neonForm.myColor.hex}}, 0 0 60px {{neonForm.myColor.hex}}, 0 0 70px {{neonForm.myColor.hex}};font-weight:100;line-height:5em;">{{neonForm.name}}</h1>
-<!--                    <img ng-src="{{neonForm.myDesign.path}}"> -->
+                    <div ng-include src="neonForm.designUrl(neonForm.myDesign)"></div>
+                    <h1 ng-show="neonForm.myDesign == null" style="font-size:{{neonForm.myFont.size}};font-family:{{neonForm.myFont.family}};text-shadow:0 0 10px #fff, 0 0 20px {{neonForm.myColor.hex}}, 0 0 30px {{neonForm.myColor.hex}}, 0 0 40px {{neonForm.myColor.hex}}, 0 0 50px {{neonForm.myColor.hex}}, 0 0 60px {{neonForm.myColor.hex}}, 0 0 70px {{neonForm.myColor.hex}};font-weight:100;line-height:5em;">{{neonForm.name}}</h1>
                 </div>
-
+            <div class="container">
+                <div ng-repeat="p in neonForm.pics" class="four columns">
+                    <a href="{{p.link}}" target="_blank"><img ng-src="{{p.images.low_resolution.url}}" title="{{p.caption.text}}"></a>
+                </div>
+            </div>
         </div>
+
+
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>

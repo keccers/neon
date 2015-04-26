@@ -1,66 +1,91 @@
-angular.module("neon", [])
+var module = angular.module("neon", [])
 
-.controller("neonForm", function($scope, $http) {
+module.factory('instagram', ['$http', function($http){
+
+  return {
+    fetchPopular: function(callback){
+            var endPoint = "https://api.instagram.com/v1/users/1817025680/media/recent/?client_id=c34fb0506ddc4c128172b8570d4b15e4&callback=JSON_CALLBACK";
+            $http.jsonp(endPoint).success(function(response){
+                callback(response.data);
+            });
+    }
+  }
+
+}]);
+
+module.controller("neonForm", function($scope, $http, instagram) {
+
+    // set up neon form and base text
        $scope.neonForm = {};
        $scope.neonForm.name = "love you";
+       $scope.neonForm.status = "text";
 
+  // init our svg shapes
        $scope.neonForm.designs = [
-            {name:'heart', path:'img/love_heart.svg'},
-            {name:'diamond', path:'img/heart.svg'},
+            null,
+            {name:'heart', path:'heart.html'},
+            {name:'waves', path:'waves.svg'},
         ];
 
+  // init our fonts
         $scope.neonForm.fonts = [
             {name:'cursive', family:'Sacramento', size: '60px', img: 'img/sacramento.png'},
             {name:'sans-serif', family:'Open Sans', size: '55px', img: 'img/opensans.png'},
         ];
 
-        $scope.neonForm.colors = [
+  //init our colors
+       $scope.neonForm.colors = [
             {name:'white', hex:'#ffffff', isActive: true},
             {name:'blue', hex:'#00FFFF', isActive: false},
             {name:'pink', hex:'#FF00FF', isActive: false},
             {name:'yellow', hex:'#FFFF00', isActive: false},
         ];
 
+  // set default shape, font and color for sign
         $scope.neonForm.myDesign = $scope.neonForm.designs[0];
         $scope.neonForm.myFont = $scope.neonForm.fonts[0];
         $scope.neonForm.myColor = $scope.neonForm.colors[0];
 
+        $scope.neonForm.pics = [];
+        $scope.neonForm.have = [];
+
+
+  // function to build urls for svg templates
+        $scope.neonForm.designUrl = function(design) {
+          return design.name + '.html';
+        }
+
+// function to set current sign color on click
         $scope.neonForm.setMyColor = function(color){
           console.log($scope.neonForm.colors);
           console.log(color.name);
         };
 
+// selected color
         $scope.neonForm.selectColor = function(index, color) {
           $scope.selectedColor = index;
           $scope.neonForm.myColor = color;
           console.log(color.name);
         };
 
+// selected font
         $scope.neonForm.selectFont = function(index, font) {
           $scope.selectedFont = index;
           $scope.neonForm.myFont = font;
           console.log(font.name);
         };
 
+// random font/color output
         $scope.neonForm.randomize = function(){
           $scope.neonForm.myFont = $scope.neonForm.fonts[Math.floor(Math.random() * $scope.neonForm.fonts.length)];
           $scope.neonForm.myColor = $scope.neonForm.colors[Math.floor(Math.random() * $scope.neonForm.colors.length)];
         };
 
+      $scope.neonForm.pics = [];
 
-     // $scope.myForm.submitTheForm = function(item, event) {
-     //   console.log("--> Submitting form");
-     //   var dataObject = {
-     //      name : $scope.myForm.name
-     //      ,car  : $scope.myForm.car
-     //   };
+      instagram.fetchPopular(function(data){
+        $scope.neonForm.pics = data;
+      });
 
-     //   var responsePromise = $http.post("/angularjs-examples/json-test-data.jsp", dataObject, {});
-     //   responsePromise.success(function(dataFromServer, status, headers, config) {
-     //      console.log(dataFromServer.title);
-     //   });
-     //    responsePromise.error(function(data, status, headers, config) {
-     //      alert("Submitting form failed!");
-     //   });
-     // }
   });
+

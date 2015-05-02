@@ -41,14 +41,25 @@ module.controller("neonForm", function($scope, $http, instagram) {
             {name:'yellow', hex:'#FFFF00', isActive: false},
         ];
 
-  // set default shape, font and color for sign
+  // set default shape, font and color and state for sign
         $scope.neonForm.myDesign = $scope.neonForm.designs[0];
         $scope.neonForm.myFont = $scope.neonForm.fonts[0];
         $scope.neonForm.myColor = $scope.neonForm.colors[0];
+        $scope.neonForm.signType = "text"
 
         $scope.neonForm.pics = [];
         $scope.neonForm.have = [];
 
+
+        $scope.neonForm.showShape = function(){
+          $scope.neonForm.signType = 'shape';
+          console.log($scope.neonForm.signType)
+        }
+
+        $scope.neonForm.showText = function(){
+          $scope.neonForm.signType = 'text'
+          console.log($scope.neonForm.signType)
+        }
 
   // function to build urls for svg templates
         $scope.neonForm.designUrl = function(design) {
@@ -81,6 +92,7 @@ module.controller("neonForm", function($scope, $http, instagram) {
           $scope.neonForm.myColor = $scope.neonForm.colors[Math.floor(Math.random() * $scope.neonForm.colors.length)];
         };
 
+//  gets the lastest instagram photos from the lightning project account
       $scope.neonForm.pics = [];
 
       instagram.fetchPopular(function(data){

@@ -12,6 +12,7 @@
 
         <link href="http://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/skeleton.css">
         <link rel="stylesheet" href="css/instagram-grid.css">
@@ -26,29 +27,34 @@
 
         <!-- Add your site or application content here -->
         <div id="neon" ng-controller="neonForm" class="ng-scope">
+            <div class='container'>
+                <div class='row'>
 
-            <select class="nullable" ng-model="neonForm.myDesign" ng-options="design.name for design in neonForm.designs">
-                <option>choose symbol</option>
-            </select>
+                    <select ng-click="neonForm.showShape()" class="nullable" ng-model="neonForm.myDesign" ng-options="design.name for design in neonForm.designs">
+                        <option>choose symbol</option>
+                    </select>
+                    <p class='inline or'>OR</p>
+                    <input ng-click="neonForm.showText()" type="text" ng-model="neonForm.name" placeholder="name">
 
-            <p class='inline or'>OR</p>
+                    <div ng-repeat="font in neonForm.fonts" ng-click="neonForm.selectFont($index, font)" ng-class="{sel: font.name == neonForm.myFont.name}" class="inline">
+                        <div class='font-choice'><img ng-src="{{font.img}}"></div>
+                    </div><!-- end ngRepeat: font in neonForm.fonts -->
 
-            <input type="text" ng-model="neonForm.name" placeholder="name">
 
-            <div ng-repeat="font in neonForm.fonts" ng-click="neonForm.selectFont($index, font)" ng-class="{sel: font.name == neonForm.myFont.name}" class="inline">
-                <div class='font-choice'><img ng-src="{{font.img}}"></div>
-            </div><!-- end ngRepeat: font in neonForm.fonts -->
+                    <div ng-repeat="color in neonForm.colors" ng-click="neonForm.selectColor($index, color)" ng-class="{sel: color.name == neonForm.myColor.name}" class="inline">
+                        <div class="circle" style="background-color:{{color.hex}}"></div>
+                    </div>
 
-            <div ng-repeat="color in neonForm.colors" ng-click="neonForm.selectColor($index, color)" ng-class="{sel: color.name == neonForm.myColor.name}" class="inline">
-                <div class="circle" style="background-color:{{color.hex}}"></div>
+                    <div class="button inline" ng-click="neonForm.randomize()">
+                        Randomize
+                    </div>
+
+                </div>
             </div>
 
-            <div class="random-button inline" ng-click="neonForm.randomize()">
-                Randomize
-            </div>
                 <div class="brick">
-                    <div ng-include src="neonForm.designUrl(neonForm.myDesign)"></div>
-                    <h1 ng-show="neonForm.myDesign == null" style="font-size:{{neonForm.myFont.size}};font-family:{{neonForm.myFont.family}};text-shadow:0 0 10px #fff, 0 0 20px {{neonForm.myColor.hex}}, 0 0 30px {{neonForm.myColor.hex}}, 0 0 40px {{neonForm.myColor.hex}}, 0 0 50px {{neonForm.myColor.hex}}, 0 0 60px {{neonForm.myColor.hex}}, 0 0 70px {{neonForm.myColor.hex}};font-weight:100;line-height:5em;">{{neonForm.name}}</h1>
+                    <div ng-show="neonForm.signType == 'shape'" id="neonshape" ng-include src="neonForm.designUrl(neonForm.myDesign)"></div>
+                    <h1 ng-show="neonForm.signType == 'text'" id="neontext" style="font-size:{{neonForm.myFont.size}};font-family:{{neonForm.myFont.family}};text-shadow:0 0 10px #fff, 0 0 20px {{neonForm.myColor.hex}}, 0 0 30px {{neonForm.myColor.hex}}, 0 0 40px {{neonForm.myColor.hex}}, 0 0 50px {{neonForm.myColor.hex}}, 0 0 60px {{neonForm.myColor.hex}}, 0 0 70px {{neonForm.myColor.hex}};font-weight:100;line-height:5em;">{{neonForm.name}}</h1>
                 </div>
 
                 <h6>gallery</h6>

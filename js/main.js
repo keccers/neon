@@ -24,7 +24,8 @@ module.controller("neonForm", function($scope, $http, instagram) {
        $scope.neonForm.designs = [
             null,
             {name:'heart', path:'heart.html'},
-            {name:'waves', path:'waves.svg'},
+            {name:'coffee', path:'coffee.html'},
+            {name:'sneaker', path:'sneaker.html'},
         ];
 
   // init our fonts
@@ -50,20 +51,20 @@ module.controller("neonForm", function($scope, $http, instagram) {
         $scope.neonForm.pics = [];
         $scope.neonForm.have = [];
 
-
+//functions to set state when the appropriate input is clicked
         $scope.neonForm.showShape = function(){
           $scope.neonForm.signType = 'shape';
-          console.log($scope.neonForm.signType)
+          console.log($scope.neonForm.signType);
         }
 
         $scope.neonForm.showText = function(){
-          $scope.neonForm.signType = 'text'
-          console.log($scope.neonForm.signType)
+          $scope.neonForm.signType = 'text';
+          console.log($scope.neonForm.signType);
         }
 
   // function to build urls for svg templates
         $scope.neonForm.designUrl = function(design) {
-          return design.name + '.html';
+          return 'shape-template/' + design.name + '.html';
         }
 
 // function to set current sign color on click

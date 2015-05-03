@@ -13,9 +13,7 @@
 html {
     background-color: #000;
     color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1em;
-    line-height: 1.4;
+    margin-top: 1%;
 }
 
 /*
@@ -27,12 +25,14 @@ html {
  */
 
 ::-moz-selection {
-    background: #b3d4fc;
+    background: #ccff15;
+    color: #333;
     text-shadow: none;
 }
 
 ::selection {
-    background: #b3d4fc;
+    background: #ccff15;
+    color: #333;
     text-shadow: none;
 }
 
@@ -97,19 +97,10 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-   /*
- * Randomize
- */
-
-/*.random-button {
-    border: 1px solid #ffffff;
-    color: #fff;
-    padding: 5px;
-    font-weight: 100;
-    text-align: center;
-    text-transform: uppercase;
-}*/
+.logo {
+  margin-bottom: 30px;
+  max-width: 30px;
+}
 
  /*
  * Form
@@ -120,7 +111,7 @@ input, select {
 }
 
 .or {
-    margin 0px 2em;
+  text-align: center;
 }
 
 .font-choice {
@@ -139,8 +130,8 @@ input, select {
 
 .circle {
     display: inline-block;
-   height: 22px;
-   width: 22px;
+   height: 25px;
+   width: 25px;
    border-radius: 50%;
    margin-right: 5px;
    margin-left: 5px;
@@ -166,6 +157,7 @@ input, select {
       rgba(32, 32, 32, 0.4)),
       radial-gradient(ellipse at center, rgba(0,0,0,0) 0%,rgba(0,0,0,0.95) 100%),
       url('../img/brick-tile.jpg');
+    margin: 20px 0;
     min-height: 200px;
     text-align: center;
 }
@@ -181,6 +173,10 @@ input, select {
 
 .inline {
    display: inline-block;
+}
+
+.text-right {
+  text-align: right;
 }
 
 /*

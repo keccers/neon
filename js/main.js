@@ -22,7 +22,6 @@ module.controller("neonForm", function($scope, $http, instagram) {
 
   // init our svg shapes
        $scope.neonForm.designs = [
-            null,
             {name:'heart', path:'heart.html'},
             {name:'coffee', path:'coffee.html'},
             {name:'sneaker', path:'sneaker.html'},

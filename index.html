@@ -86,12 +86,13 @@
                         </div><!-- end ngRepeat: font in neonForm.fonts -->
                     </div>
 
+  <!-- Reserved column for background switch
                     <div class='two columns'>
                         <div class='u-full-width' style='height:38px;background-color:purple;'>
                             <small>reserved column</small>
                         </div>
                     </div>
-
+--> 
                     <div class='two columns'>
                         <div ng-repeat="color in neonForm.colors" ng-click="neonForm.selectColor($index, color)" ng-class="{sel: color.name == neonForm.myColor.name}" class="inline">
                             <div class="circle" style="background-color:{{color.hex}}"></div>
